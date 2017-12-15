@@ -1,0 +1,4 @@
+Hole to hole distance : 56.8mm
+Hole diameter: 4.13 mm
+Lower clearance: 15mm
+Lateral Clearance: 82mm
