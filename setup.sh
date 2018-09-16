@@ -15,4 +15,6 @@ sudo pip install libxml2-dev
 sudo pip install libxslt-dev
 sudo pip install serial
 sudo pip install dronekit
+sudo pip install multiprocessing
+sudo pip install socket
 
