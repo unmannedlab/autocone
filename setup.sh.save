@@ -12,8 +12,7 @@ sudo apt-get upgrade -y
 sudo apt-get install ros-kinetic-desktop-full
 
 sudo rosdep init
-sudo rosdep fix-permissions
-rosdep update
+sudo rosdep fix-permissionsrosdep update
 
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
@@ -31,11 +30,11 @@ sudo pip install python-opencv
 sudo pip install python-numpy
 sudo pip install libxml2-dev
 sudo pip install libxslt-dev
-sudo pip install pyserial
+sudo pip install serial
 sudo pip install dronekit
 sudo pip install multiprocessing
 sudo pip install socket
-sudo pip install geopy
+
 
 
 
