@@ -38,5 +38,5 @@ sudo pip install socket
 sudo pip install geopy
 
 
-
+export ROS_MASTER_URI=http://Blade:11311/
 sudo reboot
