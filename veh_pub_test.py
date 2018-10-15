@@ -8,6 +8,7 @@ hb_to = 300
 update_rate = 1
 from geometry_msgs.msg import *
 
+
 vehicle = connect(cnct_str, baud=baud_rate, wait_ready=True, heartbeat_timeout=hb_to)
 
 cont_var = True
