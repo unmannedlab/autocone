@@ -1,0 +1,2 @@
+vn300
+-DCATKIN_DEVEL_PREFIX=/home/geo/autocone/devel -DCMAKE_INSTALL_PREFIX=/home/geo/autocone/install -G Unix Makefiles

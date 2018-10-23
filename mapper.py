@@ -32,7 +32,7 @@ def mapper(wp_list):
 		xs.append(xpt)
 		ys.append(ypt)
 		m.plot(xpt, ypt, 'co')
-		print(i)
+		#print(i)
 		i+=1
 	m.plot(xs, ys, 'r')
 
