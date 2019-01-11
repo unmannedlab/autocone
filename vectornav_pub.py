@@ -23,7 +23,6 @@ def callback(data):
 		dist_idx = int(math.ceil(car[1]))
 		
 		
-'
 def listener():
 	rospy.init_node('gps_publisher_node')
 	rospy.Subscriber('vn300/ins',Vector3,callback)

@@ -548,15 +548,15 @@ int main(int argc, char* argv[])
     /*GPS/IMU positioning, may add uncertainty later, all in meter*/
     ROS_INFO("Set GPS/IMU params");
     vn::math::vec3f antenna_a_offset;
-    antenna_a_offset[0] = -1.2319;
-    antenna_a_offset[1] = 0.1651;
-    antenna_a_offset[2] = -1.6002;
+    antenna_a_offset[0] = 0;
+    antenna_a_offset[1] = -0.5;
+    antenna_a_offset[2] = 0;
     vn200.writeGpsAntennaOffset(antenna_a_offset);
     
     vn::math::vec3f compass_baseline;
     compass_baseline[0] = 0.0;
-    compass_baseline[1] = 0.0;
-    compass_baseline[2] = -0.6477;
+    compass_baseline[1] = 1.0;
+    compass_baseline[2] = 0.0;
     vn::math::vec3f uncertainty;
     uncertainty[0]=0.025;
     uncertainty[1]=0.025;

@@ -7,4 +7,10 @@
 # new environment variables
 
 # modified environment variables
+export CMAKE_PREFIX_PATH="/home/geo/autocone/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/geo/autocone/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/geo/autocone/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/geo/autocone/build"
+export PYTHONPATH="/home/geo/autocone/devel/lib/python2.7/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/geo/autocone/devel/share/common-lisp"
+export ROS_PACKAGE_PATH="/home/geo/autocone/src:$ROS_PACKAGE_PATH"

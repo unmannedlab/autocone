@@ -1,0 +1,8 @@
+prefix=/home/geo/autocone/install
+
+Name: vn300
+Description: Description of vn300
+Version: 0.1.0
+Cflags: -I/home/geo/autocone/install/include
+Libs: -L/home/geo/autocone/install/lib 
+Requires: roscpp sensor_msgs geometry_msgs tf
