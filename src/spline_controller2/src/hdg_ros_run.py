@@ -35,7 +35,7 @@ class ros_skid_steering_pure_hdg_controller:
         telem_type
         ):
         # Initialize the rospy node
-        rospy.init_node(self.node_name)
+        rospy.init_node(node_name)
 
         # Initialize internal objects
         self.hc = heading_controller
