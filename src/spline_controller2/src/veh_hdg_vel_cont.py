@@ -1,5 +1,6 @@
 import rospy
 import time
+import geometry
 
 # Import ros messages
 from std_msgs.msg import *
