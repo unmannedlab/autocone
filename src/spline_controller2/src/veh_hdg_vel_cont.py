@@ -69,7 +69,7 @@ class ros_hdg_vel_controller:
         data    
         ):
         rospy.loginfo('Got the vel cmd {}'.format(data))
-        self.rov_cmd_vel_current = data.data
+        self.rov_cmd_vel_current = geometry.deg2rad(data.data)
     
     def callback_cmd_hdg(
         self,
