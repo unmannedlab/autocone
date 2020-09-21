@@ -29,7 +29,7 @@ class PID_hdg :
             return self.kd * (error-self.prev_error) / timedelta
     
     def error_calc( self, target, feedback ):
-        return angle_min_diff(feedback, target)
+        return angle_min_diff(target, feedback)
     
     def step( self, target, feedback, timestamp ):
         # Preliminary calculations:
