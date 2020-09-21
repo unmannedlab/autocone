@@ -63,11 +63,11 @@ class ros_vel_tester:
             # Loop for control inputs
             while True:
                 print('Input the desired velocity:\n')
-                vel = float(Input(''))
+                vel = float(input(''))
                 print('Input the desired heading:\n')
-                hdg = float(Input(''))
+                hdg = float(input(''))
                 print('\nInput time:\n')
-                time_length = float(Input(''))
+                time_length = float(input(''))
                 self.velhdg(vel, hdg, time_length)
 
         except KeyboardInterrupt:
