@@ -16,7 +16,7 @@ class ros_hdg_vel_controller:
     def __init__(
         self,
         heading_controller,
-        vehicle_transform
+        vehicle_transform,
         node_name,
         rover_pos_topic,
         rover_pos_type,
