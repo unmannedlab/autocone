@@ -114,7 +114,7 @@ if __name__=='__main__' :
         heading_controller=hc,
         vehicle_transform=tf,
         node_name='rover_vel_hdg_controller',
-        rover_pos_topic='/UBX/hpposllh',
+        rover_pos_topic='/UBX/relpos2D',
         rover_pos_type=relpos2D,
         left_velocity_topic='/left_wheel_velocity_controller/command',
         right_velocity_topic='/right_wheel_velocity_controller/command',
