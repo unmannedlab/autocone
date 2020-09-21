@@ -68,7 +68,7 @@ class ros_vel_tester:
                 hdg = float(input(''))
                 print('\nInput time:\n')
                 time_length = float(input(''))
-                self.velhdg(vel, hdg, time_length)
+                self.velhdg_test(vel, hdg, time_length)
 
         except KeyboardInterrupt:
             print('\n\nKeyboard Interrupt\n\n')
