@@ -36,17 +36,17 @@ class PID_hdg :
         if self.prev_timestamp == None:
             self.prev_timestamp = timestamp
         timedelta = timestamp - self.prev_timestamp
-        print('Target heading: {}'.format(target))
-        print('Feedback heading: {}'.format(feedback))
+        #print('Target heading: {}'.format(target))
+        #print('Feedback heading: {}'.format(feedback))
         error = self.error_calc(target, feedback)
-        print('Error: {}'.format(error))
+        #print('Error: {}'.format(error))
         PID_res = 0
         for calc_term in [self.calc_p_term, self.calc_d_term, self.calc_i_term] :
             PID_res += calc_term(error, timedelta)
         
         self.prev_timestamp = timestamp
         self.prev_error = error 
-        print('PID_result: {}'.format(PID_res))
-        print('Update delay: {}'.format(timedelta))
+        #print('PID_result: {}'.format(PID_res))
+        #print('Update delay: {}'.format(timedelta))
         return PID_res
 

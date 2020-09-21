@@ -61,21 +61,21 @@ class ros_hdg_vel_controller:
         self,
         data
         ):
-        rospy.loginfo('Got the rover {}'.format(data))
+        #rospy.loginfo('Got the rover {}'.format(data))
         self.rov_theta_current = geometry.deg2rad(data.pos.theta)
     
     def callback_cmd_vel(
         self,
         data    
         ):
-        rospy.loginfo('Got the vel cmd {}'.format(data))
+        #rospy.loginfo('Got the vel cmd {}'.format(data))
         self.rov_cmd_vel_current = data.data
     
     def callback_cmd_hdg(
         self,
         data
         ):
-        rospy.loginfo('Got the hdg cmd {}'.format(data))
+        #rospy.loginfo('Got the hdg cmd {}'.format(data))
         self.rov_cmd_hdg_current = geometry.deg2rad(data.data)
 
         # Peform update commands
@@ -84,7 +84,7 @@ class ros_hdg_vel_controller:
             hdg_rate = self.hc.step( self.rov_cmd_hdg_current, self.rov_theta_current, t)
             (rvel, lvel) = self.tf.transform( hdg_rate, self.rov_cmd_vel_current)
 
-            rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(self.rov_cmd_hdg_current, self.rov_cmd_vel_current, hdg_rate, rvel, lvel))
+            #rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(self.rov_cmd_hdg_current, self.rov_cmd_vel_current, hdg_rate, rvel, lvel))
             self.msg_lt.data = lvel 
             self.msg_rt.data = rvel 
 
@@ -102,7 +102,7 @@ class ros_hdg_vel_controller:
 
 if __name__=='__main__' :
     # This is going to run the heading / velocity control loop
-    kp = 5.0
+    kp = 15
     ki = 0
     kd = 0
 
