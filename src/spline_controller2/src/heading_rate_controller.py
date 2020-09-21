@@ -37,13 +37,13 @@ class PID_hdg :
             self.prev_timestamp = timestamp
         timedelta = timestamp - self.prev_timestamp
         error = self.error_calc(target, feedback)
-        #print(error)
+        print(error)
         PID_res = 0
         for calc_term in [self.calc_p_term, self.calc_d_term, self.calc_i_term] :
             PID_res += calc_term(error, timedelta)
         
         self.prev_timestamp = timestamp
         self.prev_error = error 
-
+        print(PID_res)
         return PID_res
 
