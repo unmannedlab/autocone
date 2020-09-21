@@ -36,6 +36,8 @@ class PID_hdg :
         if self.prev_timestamp == None:
             self.prev_timestamp = timestamp
         timedelta = timestamp - self.prev_timestamp
+        print('Target heading: {}'.format(target))
+        print('Feedback heading: {}'.format(feedback))
         error = self.error_calc(target, feedback)
         print(error)
         PID_res = 0
