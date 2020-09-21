@@ -49,8 +49,8 @@ class ros_vel_tester:
         while time.time() <= et :
             
             # Send the velocity commands
-            vpub.publish(self.vmsg)
-            hpub.publish(self.hmsg)
+            self.vpub.publish(self.vmsg)
+            self.hpub.publish(self.hmsg)
 
             time.sleep(self.delay)
 
