@@ -93,8 +93,8 @@ class ros_hdg_vel_controller:
     def listener( self ) :
         # Starat the subscribers
         rospy.Subscriber(self.rover_pos_topic, self.rover_pos_type, self.callback_rov_pos)
-        rospy.Subscriber(self.cmd_topic_vel, self.command_type, self.callback_cmd_vel)
-        rospy.Subscriber(self.cmd_topic_hdg, self.command_type, self.callback_cmd_hdg)
+        rospy.Subscriber(self.cmd_topic_vel, self.cmd_type, self.callback_cmd_vel)
+        rospy.Subscriber(self.cmd_topic_hdg, self.cmd_type, self.callback_cmd_hdg)
 
         # Use rospy spin to hold the node open or whatever
         rospy.spin()
