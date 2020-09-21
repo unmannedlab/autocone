@@ -84,7 +84,7 @@ class ros_hdg_vel_controller:
             hdg_rate = self.hc.step( self.rov_cmd_hdg_current, self.rov_theta_current, t)
             (rvel, lvel) = self.tf.transform( hdg_rate, self.rov_cmd_vel_current)
 
-            rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(targ_hdg, targ_vel, hdg_rate, rvel, lvel))
+            rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(self.rov_cmd_hdg_current, self.rov_cmd_vel_current, hdg_rate, rvel, lvel))
             self.msg_lt.data = lvel 
             self.msg_rt.data = rvel 
 
