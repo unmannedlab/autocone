@@ -102,7 +102,7 @@ class ros_hdg_vel_controller:
 
 if __name__=='__main__' :
     # This is going to run the heading / velocity control loop
-    kp = 1
+    kp = 0.1
     ki = 0
     kd = 0
 
