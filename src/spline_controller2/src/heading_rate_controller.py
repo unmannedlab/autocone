@@ -47,5 +47,6 @@ class PID_hdg :
         self.prev_timestamp = timestamp
         self.prev_error = error 
         print('PID_result: {}'.format(PID_res))
+        print('Update delay: {}'.format(timedelta))
         return PID_res
 
