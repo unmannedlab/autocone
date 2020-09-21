@@ -51,9 +51,9 @@ class ros_hdg_vel_controller:
         self.time_start = time.time()
         
         # Initialize left and right publishers
-        self.pub_lt = rospy.Publisher(self.lt_topic, self.velocity_type, queue_size=10)
+        self.pub_lt = rospy.Publisher(self.lt_topic, self.vel_type, queue_size=10)
         self.msg_lt = self.vel_type()
-        self.pub_rt = rospy.Publisher(self.rt_topic, self.velocity_type, queue_size=10)
+        self.pub_rt = rospy.Publisher(self.rt_topic, self.vel_type, queue_size=10)
         self.msg_rt = self.vel_type()
 
     def callback_rov_pos(
