@@ -49,8 +49,8 @@ class ros_vel_tester:
         while time.time() <= et :
             
             # Send the velocity commands
-            vpub.publish(self.vmsg)
-            hpub.publish(self.hmsg)
+            self.vpub.publish(self.vmsg)
+            self.hpub.publish(self.hmsg)
 
             time.sleep(self.delay)
 
@@ -63,12 +63,12 @@ class ros_vel_tester:
             # Loop for control inputs
             while True:
                 print('Input the desired velocity:\n')
-                vel = float(Input(''))
+                vel = float(input(''))
                 print('Input the desired heading:\n')
-                hdg = float(Input(''))
+                hdg = float(input(''))
                 print('\nInput time:\n')
-                time_length = float(Input(''))
-                self.velhdg(vel, hdg, time_length)
+                time_length = float(input(''))
+                self.velhdg_test(vel, hdg, time_length)
 
         except KeyboardInterrupt:
             print('\n\nKeyboard Interrupt\n\n')

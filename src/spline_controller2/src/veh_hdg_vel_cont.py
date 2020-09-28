@@ -1,5 +1,6 @@
 import rospy
 import time
+import geometry
 
 # Import ros messages
 from std_msgs.msg import *
@@ -16,7 +17,7 @@ class ros_hdg_vel_controller:
     def __init__(
         self,
         heading_controller,
-        vehicle_transform
+        vehicle_transform,
         node_name,
         rover_pos_topic,
         rover_pos_type,
@@ -56,34 +57,33 @@ class ros_hdg_vel_controller:
         self.cmd_hdg_new = False 
         
         # Initialize left and right publishers
-        self.pub_lt = rospy.Publisher(self.lt_topic, self.velocity_type, queue_size=10)
+        self.pub_lt = rospy.Publisher(self.lt_topic, self.vel_type, queue_size=10)
         self.msg_lt = self.vel_type()
-        self.pub_rt = rospy.Publisher(self.rt_topic, self.velocity_type, queue_size=10)
+        self.pub_rt = rospy.Publisher(self.rt_topic, self.vel_type, queue_size=10)
         self.msg_rt = self.vel_type()
 
     def callback_rov_pos(
         self,
         data
         ):
-        rospy.loginfo('Got the rover {}'.format(data))
         self.rov_pos_new = True
+        #rospy.loginfo('Got the rover {}'.format(data))
         self.rov_theta_current = geometry.deg2rad(data.pos.theta)
     
     def callback_cmd_vel(
         self,
         data    
         ):
-        rospy.loginfo('Got the vel cmd {}'.format(data))
         self.cmd_vel_new = True
+        #rospy.loginfo('Got the vel cmd {}'.format(data))
         self.rov_cmd_vel_current = data.data
     
     def callback_cmd_hdg(
         self,
         data
         ):
-        rospy.loginfo('Got the hdg cmd {}'.format(data))
-        self.rov_cmd_hdg_current = data.data
-        self.cmd_hdg_new = True
+        #rospy.loginfo('Got the hdg cmd {}'.format(data))
+        self.rov_cmd_hdg_current = geometry.deg2rad(data.data)
 
         # Peform update commands
         if self.rov_pos_new and self.cmd_vel_new and self.rov_cmd_new and self.rov_theta_current != None and self.rov_cmd_vel_current != None and self.rov_cmd_hdg_current != None :
@@ -91,7 +91,7 @@ class ros_hdg_vel_controller:
             hdg_rate = self.hc.step( self.rov_cmd_hdg_current, self.rov_theta_current, t)
             (rvel, lvel) = self.tf.transform( hdg_rate, self.rov_cmd_vel_current)
 
-            rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(targ_hdg, targ_vel, hdg_rate, rvel, lvel))
+            #rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(self.rov_cmd_hdg_current, self.rov_cmd_vel_current, hdg_rate, rvel, lvel))
             self.msg_lt.data = lvel 
             self.msg_rt.data = rvel 
 
@@ -105,15 +105,15 @@ class ros_hdg_vel_controller:
     def listener( self ) :
         # Start the subscribers
         rospy.Subscriber(self.rover_pos_topic, self.rover_pos_type, self.callback_rov_pos)
-        rospy.Subscriber(self.cmd_topic_vel, self.command_type, self.callback_cmd_vel)
-        rospy.Subscriber(self.cmd_topic_hdg, self.command_type, self.callback_cmd_hdg)
+        rospy.Subscriber(self.cmd_topic_vel, self.cmd_type, self.callback_cmd_vel)
+        rospy.Subscriber(self.cmd_topic_hdg, self.cmd_type, self.callback_cmd_hdg)
 
         # Use rospy spin to hold the node open or whatever
         rospy.spin()
 
 if __name__=='__main__' :
     # This is going to run the heading / velocity control loop
-    kp = 1
+    kp = 15
     ki = 0
     kd = 0
 
@@ -126,8 +126,8 @@ if __name__=='__main__' :
         heading_controller=hc,
         vehicle_transform=tf,
         node_name='rover_vel_hdg_controller',
-        rover_pos_topic='/UBX/hpposllh',
-        rover_pos_type=hpposllh,
+        rover_pos_topic='/UBX/relpos2D',
+        rover_pos_type=relpos2D,
         left_velocity_topic='/left_wheel_velocity_controller/command',
         right_velocity_topic='/right_wheel_velocity_controller/command',
         velocity_type=Float64,
