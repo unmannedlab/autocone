@@ -49,6 +49,11 @@ class ros_hdg_vel_controller:
         self.cmd_topic_hdg = command_hdg_topic
         self.cmd_type = command_type
         self.time_start = time.time()
+
+        # Initialize check variables
+        self.rov_pos_new = False
+        self.cmd_vel_new = False 
+        self.cmd_hdg_new = False 
         
         # Initialize left and right publishers
         self.pub_lt = rospy.Publisher(self.lt_topic, self.velocity_type, queue_size=10)
@@ -61,6 +66,7 @@ class ros_hdg_vel_controller:
         data
         ):
         rospy.loginfo('Got the rover {}'.format(data))
+        self.rov_pos_new = True
         self.rov_theta_current = geometry.deg2rad(data.pos.theta)
     
     def callback_cmd_vel(
@@ -68,6 +74,7 @@ class ros_hdg_vel_controller:
         data    
         ):
         rospy.loginfo('Got the vel cmd {}'.format(data))
+        self.cmd_vel_new = True
         self.rov_cmd_vel_current = data.data
     
     def callback_cmd_hdg(
@@ -76,9 +83,10 @@ class ros_hdg_vel_controller:
         ):
         rospy.loginfo('Got the hdg cmd {}'.format(data))
         self.rov_cmd_hdg_current = data.data
+        self.cmd_hdg_new = True
 
         # Peform update commands
-        if self.rov_theta_current != None and self.rov_cmd_vel_current != None and self.rov_cmd_hdg_current != None :
+        if self.rov_pos_new and self.cmd_vel_new and self.rov_cmd_new and self.rov_theta_current != None and self.rov_cmd_vel_current != None and self.rov_cmd_hdg_current != None :
             t = time.time() - self.time_start
             hdg_rate = self.hc.step( self.rov_cmd_hdg_current, self.rov_theta_current, t)
             (rvel, lvel) = self.tf.transform( hdg_rate, self.rov_cmd_vel_current)
@@ -90,8 +98,12 @@ class ros_hdg_vel_controller:
             self.pub_lt.publish( self.msg_lt )
             self.pub_rt.publish( self.msg_rt )
 
+        self.rov_pos_new = False
+        self.cmd_vel_new = False 
+        self.cmd_hdg_new = False 
+        
     def listener( self ) :
-        # Starat the subscribers
+        # Start the subscribers
         rospy.Subscriber(self.rover_pos_topic, self.rover_pos_type, self.callback_rov_pos)
         rospy.Subscriber(self.cmd_topic_vel, self.command_type, self.callback_cmd_vel)
         rospy.Subscriber(self.cmd_topic_hdg, self.command_type, self.callback_cmd_hdg)
