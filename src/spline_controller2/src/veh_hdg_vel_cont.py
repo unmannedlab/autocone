@@ -84,14 +84,15 @@ class ros_hdg_vel_controller:
         ):
         #rospy.loginfo('Got the hdg cmd {}'.format(data))
         self.rov_cmd_hdg_current = geometry.deg2rad(data.data)
+	self.cmd_hdg_new = True
 
         # Peform update commands
-        if self.rov_pos_new and self.cmd_vel_new and self.rov_cmd_new and self.rov_theta_current != None and self.rov_cmd_vel_current != None and self.rov_cmd_hdg_current != None :
+        if self.rov_pos_new and self.cmd_vel_new and self.cmd_hdg_new and self.rov_theta_current != None and self.rov_cmd_vel_current != None and self.rov_cmd_hdg_current != None :
             t = time.time() - self.time_start
             hdg_rate = self.hc.step( self.rov_cmd_hdg_current, self.rov_theta_current, t)
             (rvel, lvel) = self.tf.transform( hdg_rate, self.rov_cmd_vel_current)
 
-            #rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(self.rov_cmd_hdg_current, self.rov_cmd_vel_current, hdg_rate, rvel, lvel))
+            rospy.loginfo('Sending the following commands \n target heading: {} \n target velocity: {} heading_rate: {} \n left/right velocity : {} / {}'.format(self.rov_cmd_hdg_current, self.rov_cmd_vel_current, hdg_rate, rvel, lvel))
             self.msg_lt.data = lvel 
             self.msg_rt.data = rvel 
 
@@ -113,9 +114,9 @@ class ros_hdg_vel_controller:
 
 if __name__=='__main__' :
     # This is going to run the heading / velocity control loop
-    kp = 25
-    ki = 0
-    kd = 0
+    kp = 2.5
+    ki = 0.0
+    kd = 0.1
 
     # Initialize the heading controller and the transform
     hc = PID_hdg(kp, ki, kd)
