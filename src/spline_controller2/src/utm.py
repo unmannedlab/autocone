@@ -11,13 +11,13 @@ class utm :
         # Store internal parameters
         self.lambda0 = ref_lon
         self.h0 = ref_height
-        self.a = 6378.137
+        self.a = 6378.137 * 1000 # m
         self.f = 1 / 298.257223563
         self.k0 = 0.9996
         self.E0 = 500
         self.N0 = {
-            'northern':0,
-            'southern':10000
+            'northern':0, #m 
+            'southern':10000 * 1000 # m
         }
 
         self.hemi = {

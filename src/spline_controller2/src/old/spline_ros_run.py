@@ -59,8 +59,8 @@ class ros_skid_steering_controller:
         # Add the source gps point to the data stack of the rover controller
         
         # Define x, y, t
-        x=data.llh.lon
-        y=data.llh.lat
+        x=data.llh.lat
+        y=data.llh.lon
         t=time.time()
 
         # Add the source GPS point to the spline controller:
