@@ -20,9 +20,6 @@ catkin_python_setup()
 add_message_files(
   DIRECTORY msg
   FILES
-  llh.msg 
-  hpposllh.msg 
-  relpos2D.msg 
 )
 
 ## Generate added messages and services with any dependencies listed here
