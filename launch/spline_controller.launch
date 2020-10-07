@@ -1,0 +1,5 @@
+<launch>
+
+<node name="veh_spline_pub" pkg="autocone" type="veh_spline_pub" output="screen"/>
+
+</launch>
