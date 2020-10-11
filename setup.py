@@ -23,7 +23,9 @@ setup_args = generate_distutils_setup(
         'Topic :: Communications'
     ],
     url="https://github.com/unmannedlab/autocone",
-    packages='autocone_tools',
+    packages=[
+        'autocone'
+    ],
     package_dir={'' : 'src'}
     
     )
