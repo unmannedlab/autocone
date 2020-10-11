@@ -10,7 +10,7 @@ def readme():
 
 
 setup_args = generate_distutils_setup(
-    name='autocone'
+    name='autocone',
     packages='autocone',
     package_dir={'' : 'src'},
     test_suite='nose.collector',
