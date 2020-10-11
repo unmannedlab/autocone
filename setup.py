@@ -10,7 +10,7 @@ def readme():
 
 
 setup_args = generate_distutils_setup(
-    name='autocone',
+    name='autocone_tools',
     version='0.0.1',
     author='George Chustz',
     author_email='gchustz@tamu.edu',
