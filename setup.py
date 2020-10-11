@@ -10,25 +10,11 @@ def readme():
 
 
 setup_args = generate_distutils_setup(
-    name='ubxtranslator',
-    version='0.1.1',
-    description='A lightweight python library for translating UBX packets',
-    long_description=readme(),
-    classifiers=[
-        'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Programming Language :: Python :: 3',
-        'Topic :: Communications'
-    ],
-    url='http://github.com/dalymople/ubxtranslator',
-    author='Dalymople',
-    author_email='dalymople@gmail.com',
-    license='GNU GPL v3',
-    packages=[  'ubxtranslator',
-                'ubxtranslator.config'],
+    name='autocone'
+    packages='autocone',
     package_dir={'' : 'src'},
     test_suite='nose.collector',
-    tests_require=['nose'],
+    tests_require=['nose']
     )
 
 setup(**setup_args)
