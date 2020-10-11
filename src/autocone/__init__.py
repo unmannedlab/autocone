@@ -1,0 +1,3 @@
+"""
+A spline following implementation
+"""
