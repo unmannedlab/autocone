@@ -77,7 +77,7 @@ class spline_controller :
     def src_buffer_add( self, pos_x, pos_y, time_stamp ) :
 
         # Check which step we're on
-        a
+        
         if self.buf_x == None and self.buf_y == None and self.buf_timestamp == None :
             # This is the first step, simply add the items
             self.buf_x = pos_x
