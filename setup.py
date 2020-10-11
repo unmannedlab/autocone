@@ -16,15 +16,16 @@ setup_args = generate_distutils_setup(
     author_email='gchustz@tamu.edu',
     description='A package which implements a simple spline control algorithm on a rover',
     long_description=readme(),
-    url="https://github.com/unmannedlab/autocone",
-    packages='autocone_tools',
-    package_dir={'' : 'src'},
     classifiers=[
         'Development Status :: 0 - Alpha',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3',
-        'Topic :: Robotics'
-    ]
+        'Topic :: Communications'
+    ],
+    url="https://github.com/unmannedlab/autocone",
+    packages='autocone_tools',
+    package_dir={'' : 'src'}
+    
     )
 
 setup(**setup_args)
