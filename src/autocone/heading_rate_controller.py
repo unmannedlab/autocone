@@ -1,6 +1,6 @@
 # Import libraries
 import numpy as np 
-from geometry import angle_min_diff
+from autocone.geometry import angle_min_diff
 
 class PID_hdg :
     def __init__(self, kp, ki, kd):

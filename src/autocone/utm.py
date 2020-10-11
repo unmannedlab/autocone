@@ -1,8 +1,8 @@
 """
 """
 import numpy as np 
-from geometry import deg2rad, rad2deg
-
+from autocone.geometry import deg2rad, rad2deg
+import autocone.geometry as geometry
 class utm :
     """
     """

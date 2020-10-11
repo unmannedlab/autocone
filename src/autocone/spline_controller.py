@@ -5,9 +5,9 @@
 import numpy as np 
 
 # Import my libraries
-import utils
-import geometry
-import utm 
+import autocone.utils as utils
+import autocone.geometry as geometry
+import autocone.utm as utm 
 
 class spline_controller :
     """
