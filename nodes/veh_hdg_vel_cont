@@ -84,7 +84,7 @@ class ros_hdg_vel_controller:
         ):
         #rospy.loginfo('Got the hdg cmd {}'.format(data))
         self.rov_cmd_hdg_current = geometry.deg2rad(data.data)
-	self.cmd_hdg_new = True
+	    self.cmd_hdg_new = True
 
         # Peform update commands
         if self.rov_pos_new and self.cmd_vel_new and self.cmd_hdg_new and self.rov_theta_current != None and self.rov_cmd_vel_current != None and self.rov_cmd_hdg_current != None :
