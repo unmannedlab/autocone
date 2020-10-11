@@ -14,7 +14,7 @@ setup_args = generate_distutils_setup(
     version='0.0.1',
     author='George Chustz',
     author_email='gchustz@tamu.edu',
-    description='A package which implements a simple spline control algorithm on a rover',
+    description='A set of python scripts implementing a path following system for a robot following a lead gps source',
     long_description=readme(),
     classifiers=[
         'Development Status :: 0 - Alpha',
