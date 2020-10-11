@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rospy
 import time
-import geometry
+import autocone.geometry as geometry
 
 # Import ros messages
 from std_msgs.msg import *
