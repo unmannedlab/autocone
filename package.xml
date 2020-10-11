@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>autocone</name>
-  <version>0.1.0</version>
+  <version>0.0.1</version>
   <description>A set of python scripts implementing a path following system for a robot following a lead gps source</description>
 
   <maintainer email="gchustz@tamu.edu">George Chustz</maintainer>
