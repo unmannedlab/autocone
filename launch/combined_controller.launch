@@ -1,0 +1,4 @@
+<launch>
+<include file="$(find autocone)/launch/vel_hdg_controller.launch" />
+<include file="$(find autocone)/launch/spline_controller.launch" />
+</launch>

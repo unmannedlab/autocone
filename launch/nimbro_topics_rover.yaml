@@ -1,9 +1,0 @@
-topics:
- - name: "/UBX/relpos2D"
- - name: "/UBX/hpposllh"
- - name: "/rov_cmd/vel"
- - name: "/rov_cmd/hdg"
- - name: "/left_wheel_velocity_controller/command"
- - name: "/left_wheel_velocity_controller/velocity"
- - name: "/right_wheel_velocity_controller/command"
- - name: "/right_wheel_velocity_controller/velocity"

@@ -1,5 +1,0 @@
-<launch>
-
-<node name="src_ubx_publisher" pkg="ubxtranslator" type="src_ubx_publisher" output="screen"/>
-
-</launch>
