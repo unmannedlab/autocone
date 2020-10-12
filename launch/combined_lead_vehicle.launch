@@ -1,4 +1,4 @@
 <launch>
-<include file="$(find nimbro_network)/nimbro_topic_transport/launch/nimbro_rover.launch" />
+<include file="$(find nimbro_topic_transport)/launch/nimbro_rover.launch" />
 <include file="$(find ubxtranslator)/launch/src_ubxtranslator.launch" />
 </launch>
