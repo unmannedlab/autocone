@@ -5,7 +5,7 @@
 
 class tf_skid_steering :
     """This will accomplish the transforms for the takn skid steering"""
-    def __init__(self, axel_length, wheel_diameter, input_dim='linear', output_dim='linear') :
+    def __init__(self, axel_length, wheel_diameter, input_dim='linear', output_dim='angular') :
 
         # Set internal parameters
 
