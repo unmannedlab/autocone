@@ -12,7 +12,7 @@ import autocone.utm as utm
 # Import ros messages
 from std_msgs.msg import *
 from geometry_msgs.msg import * 
-from ubxtranslator.msg import relpos2D, llh
+from ubxtranslator.msg import relpos2D, hpposllh
 
 
 # Create a class which subscribes to the rover pos, gps coordinates, and the source gps coordinates and publishes velocity and heading commands for the rover
@@ -76,7 +76,7 @@ class ros_spline_mgr:
     def callback_rov_pos( self, data ):
 
         # Perform the rospy loginfo:
-        rospy.loginfo('Received the rover position: {}'.format(data))
+        #rospy.loginfo('Received the rover position: {}'.format(data))
 
         # Set the theta and the current vars
         self.rov_theta = geometry.deg2rad(data.pos.theta)
@@ -86,7 +86,7 @@ class ros_spline_mgr:
         # Produce the rover feedback commands:
 
         # Perform rospy loginfo
-        rospy.loginfo('Received the rover gps: {}'.format(data))
+        #rospy.loginfo('Received the rover gps: {}'.format(data))
         
         # Define parameters from the incoming message
         rov_lat = data.llh.lat
@@ -144,9 +144,9 @@ if __name__ == '__main__' :
         sc,
         'ros_rover_mgr_node',
         '/src_UBX/hpposllh',
-        llh,
+        hpposllh,
         '/UBX/hpposllh',
-        llh,
+        hpposllh,
         '/UBX/relpos2D',
         relpos2D,
         '/rov_cmd/vel',
