@@ -4,9 +4,9 @@
 import sys, os, time
 import numpy as np 
 import pandas as pd 
-from spline_controller import spline_controller
-import geometry
-import utm
+from autocone.spline_controller import spline_controller
+import autocone.geometry as geometry
+import autocone.utm as utm
 
 # Import ros messages
 from std_msgs.msg import *

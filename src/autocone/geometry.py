@@ -5,7 +5,7 @@
 import numpy as np 
 
 # import functionality from my libraries
-import utils
+import autocone.utils as utils
 
 # import geopy for distance calculations
 #from geopy.distance import geodesic

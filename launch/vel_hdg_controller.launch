@@ -1,5 +1,5 @@
 <launch>
 
-<node name="veh_hdg_vel_cont" pkg="autocone" type="veh_vel_vel_hdg" output="screen"/>
+<node name="veh_hdg_vel_cont" pkg="autocone" type="veh_hdg_vel_cont" output="screen"/>
 
 </launch>
