@@ -54,10 +54,8 @@ def angle_comp_prep( angle ) :
     
     return angle 
 
-def angle_std( angle ) :
-    # Returns an equivalent angle between 0 and 2 pi
-    angle = angle_comp_prep(angle)
-    return angle - 2* np.pi
+def angle_std( angle ):
+    return angle_comp_prep(angle) - 2 * np.pi
 def angle_min_diff( angle0, angle1 ) :
 
     # This function will return the smallest possible difference between angle 1 and angle 0
@@ -175,10 +173,8 @@ def target_heading_function(
     """ """
     hdg_error = angle_min_diff( rov_heading, closest_point_heading )
     brg = bearing( (rov_x, rov_y), (closest_point_x, closest_point_y))
-    brg_error =  angle_min_diff( rov_heading, brg )
-    dist = distance( (closest_point_x, closest_point_y), (rov_x, rov_y))
-    err_dist = dist * np.sin( brg_error / 2 )
-    err  = (np.math.atan(err_dist) + hdg_error)
+    dist = np.sign( angle_min_diff( closest_point_heading, brg )) * distance( (closest_point_x, closest_point_y), (rov_x, rov_y))
+    err  = (np.math.atan(dist) + hdg_error)
 
     targ_hdg = angle_std(rov_heading+err) 
 
