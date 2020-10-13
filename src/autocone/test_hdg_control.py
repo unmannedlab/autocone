@@ -4,6 +4,7 @@ import time
 
 # Import ros messages
 from std_msgs.msg import *
+import autocone.geometry as geometry
 
 class ros_vel_tester:
     """
@@ -65,7 +66,7 @@ class ros_vel_tester:
                 print('Input the desired velocity:\n')
                 vel = float(input(''))
                 print('Input the desired heading:\n')
-                hdg = float(input(''))
+                hdg = geometry.deg2rad(float(input('')))
                 print('\nInput time:\n')
                 time_length = float(input(''))
                 self.velhdg_test(vel, hdg, time_length)

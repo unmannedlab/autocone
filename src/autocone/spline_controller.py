@@ -196,7 +196,7 @@ class spline_controller :
             
         if hdg_targ == None and vel_targ == None and lateness == None :
             # This will return 0 for all responses
-            hdg_targ = 0
+            hdg_targ = rov_heading
             vel_targ = 0
             lateness = 0
             halt=True
