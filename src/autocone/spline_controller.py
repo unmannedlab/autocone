@@ -21,6 +21,7 @@ class spline_controller :
         rov_max_speed,
         rov_min_speed,
         rov_max_lat_acc,
+        rov_ang_tol,
         min_src_gap,
         min_src_dist,
         min_points,
@@ -41,6 +42,7 @@ class spline_controller :
         self.rov_max_speed = rov_max_speed
         self.rov_min_speed = rov_min_speed
         self.rov_max_lat_acc = rov_max_lat_acc
+        self.rov_ang_tol = rov_ang_tol
         self.src_min_gap = min_src_gap
         self.src_min_dist = min_src_dist
         self.src_min_points = min_points
@@ -108,6 +110,7 @@ class spline_controller :
                 vel_y = (pos_y - self.buf_y) / (time_stamp - self.buf_timestamp)
 
                 vel = np.sqrt( vel_x**2 + vel_y**2 )
+                print('Estimated source velocity: {} m/s'.format(vel))
                 ret = (self.buf_timestamp, self.buf_x, self.buf_y, vel, new_theta, theta_dist_rate, head_delta, dist, total_dist)
 
                 
@@ -137,14 +140,18 @@ class spline_controller :
             if self.src_data.curr_max_idx + 1 >= self.src_min_points :
                 self.ready=True
 
-    def targ_velocity(self, cp_vel, cp_hdg_rate, cp_hdg_delta):
+    def targ_velocity(self, rov_hdg, cur_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta):
         
         # Calculate the max velocity from lateral acceleration
-        if cp_hdg_delta != 0 :
+        if abs(cp_hdg_delta) < self.rov_ang_tol :
             v_acc = (2 * self.rov_max_lat_acc * np.sin(cp_hdg_delta/2)) / cp_hdg_delta
+        elif abs(geometry.angle_min_diff(rov_hdg,cp_hdg)) > self.rov_ang_tol :
+            v_acc = self.rov_min_speed
+
         else :
             v_acc = self.rov_max_speed
-        v_src = max(cp_vel, self.rov_min_speed)
+
+        v_src = max(cur_vel, self.rov_min_speed)
         v_allow = min(v_acc, v_src, self.rov_max_speed)
 
         return v_allow
@@ -179,7 +186,7 @@ class spline_controller :
                 cp_timestamp = arr[closest_idx, self.idx_timestamp]
                 cp_x = arr[closest_idx, self.idx_x]
                 cp_y = arr[closest_idx, self.idx_y]
-                cp_vel = arr[closest_idx, self.idx_vel]
+                cur_vel = arr[self.src_data.curr_max_idx, self.idx_vel]
                 cp_hdg = arr[closest_idx, self.idx_heading]
                 cp_hdg_rate = arr[closest_idx, self.idx_heading_dist_rate]
                 cp_hdg_delta = arr[closest_idx, self.idx_heading_delta]
@@ -190,7 +197,7 @@ class spline_controller :
                 hdg_targ_unbounded = self.targ_hdg_fnc(rov_x, rov_y, rov_heading, cp_x, cp_y, cp_hdg)
                 next_point_brg = geometry.bearing( (rov_x, rov_y), (arr[closest_idx+look_ahead,self.idx_x],arr[closest_idx+look_ahead,self.idx_y]))
                 hdg_targ = geometry.targ_angle_bound(hdg_targ_unbounded, next_point_brg, cp_hdg)
-                vel_targ = self.targ_velocity( cp_vel, cp_hdg_rate, cp_hdg_delta)
+                vel_targ = self.targ_velocity(rov_heading, cur_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta)
                 halt=False
             
             
