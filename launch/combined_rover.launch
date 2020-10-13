@@ -1,5 +1,5 @@
 <launch>
 <include file="$(find nimbro_topic_transport)/launch/nimbro_rover.launch" />
-<include file="$(find omincone)/launch/autocone.launch" />
+<include file="$(find omnicone)/launch/autocone.launch" />
 <include file="$(find ubxtranslator)/launch/ubxtranslator.launch" />
 </launch>
