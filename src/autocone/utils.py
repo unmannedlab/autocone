@@ -36,7 +36,7 @@ class queue_array_handler_2D :
         # Generate the data array
         self.data = np.zeros( (max_length, no_columns) )
 
-        self.curr_max_idx = 0
+        self.curr_max_idx = None
         self.max_length = max_length
         self.no_columns = no_columns
 
@@ -59,8 +59,10 @@ class queue_array_handler_2D :
 
     def add(self, tuple_var) :
 
-        if self.curr_max_idx < self.max_length - 1 :
+        if self.curr_max_idx == None or self.curr_max_idx < self.max_length - 1 :
             # Simply add the item to the end
+            if self.curr_max_idx == None:
+                self.curr_max_idx = -1 
             ridx = self.curr_max_idx + 1
             for cidx in range( self.no_columns ) :
                 self.data[ridx,cidx] = tuple_var[cidx]
@@ -102,7 +104,7 @@ class queue_array_handler_2D :
 
         
     def get_whole_array(self):
-        return self.data[:self.curr_max_idx, :]
+        return self.data[:self.curr_max_idx+1, :]
         
 
             

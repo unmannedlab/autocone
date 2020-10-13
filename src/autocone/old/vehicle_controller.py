@@ -1,10 +1,10 @@
  # Import libraries
 
 import numpy as np
-import utm 
-from spline_controller import spline_controller
-import utils 
-import geometry
+import autocone.utm as utm 
+from autocone.spline_controller import spline_controller
+import autocone.utils as utils
+import autocone.geometry as geometrys
 
 class vehicle_controller :
     """This will act as a go manager of various parts of the control schema"""
