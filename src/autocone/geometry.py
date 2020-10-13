@@ -175,8 +175,9 @@ def target_heading_function(
     """ """
     hdg_error = angle_min_diff( rov_heading, closest_point_heading )
     brg = bearing( (rov_x, rov_y), (closest_point_x, closest_point_y))
+    brg_error =  angle_min_diff( rov_heading, brg )
     dist = distance( (closest_point_x, closest_point_y), (rov_x, rov_y))
-    err_dist = dist * np.sin( hdg_error / 2 )
+    err_dist = dist * np.sin( brg_error / 2 )
     err  = (np.math.atan(err_dist)/2 + hdg_error)
 
     targ_hdg = angle_std(rov_heading+err) 
