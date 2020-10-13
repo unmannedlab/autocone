@@ -64,7 +64,7 @@ class ros_spline_mgr:
         # Add the source gps point to the data stack of the rover controller
 
         # perform the loginfo rospy
-        rospy.loginfo('Received the source gps point: \n{}'.format(data))
+        #rospy.loginfo('Received the source gps point: \n{}'.format(data))
         # Define src_x, src_y, time:
         src_lat = data.llh.lat 
         src_lon = data.llh.lon 
@@ -104,7 +104,7 @@ class ros_spline_mgr:
         self.cmd_vel_msg.data = vel_targ 
 
         # Create rospy loginfo
-        rospy.loginfo('Publishing target heading and velocity: {} and {}'.format(self.cmd_hdg_msg, self.cmd_vel_msg))
+        #rospy.loginfo('Publishing target heading and velocity: {} and {}'.format(self.cmd_hdg_msg, self.cmd_vel_msg))
         
         # Publish commands
         self.cmd_vel_pub.publish(self.cmd_vel_msg)
