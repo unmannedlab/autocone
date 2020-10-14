@@ -190,7 +190,7 @@ class spline_controller :
                         cur_vel = arr[self.src_data.curr_max_idx, self.idx_vel]
                 except IndexError:
                         cur_Vel = arr[self.src_data.curr_max_idx-1, self.idx_vel]
-		cp_hdg = arr[closest_idx, self.idx_heading]
+                cp_hdg = arr[closest_idx, self.idx_heading]
                 cp_hdg_rate = arr[closest_idx, self.idx_heading_dist_rate]
                 cp_hdg_delta = arr[closest_idx, self.idx_heading_delta]
 
