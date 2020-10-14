@@ -105,7 +105,3 @@ class queue_array_handler_2D :
         
     def get_whole_array(self):
         return self.data[:self.curr_max_idx+1, :]
-        
-
-            
-
