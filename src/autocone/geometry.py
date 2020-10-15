@@ -174,9 +174,12 @@ def target_heading_function(
     """ """
     hdg_error = angle_min_diff( rov_heading, closest_point_heading )
     brg = bearing( (rov_x, rov_y), (closest_point_x, closest_point_y))
-    dist = np.sin( angle_min_diff( closest_point_heading, brg )) * distance( (closest_point_x, closest_point_y), (rov_x, rov_y))
-    err  = (np.math.atan(dist) + hdg_error)
+    dist = np.sin( angle_min_diff( closest_point_heading,brg )) * distance( (closest_point_x, closest_point_y), (rov_x, rov_y))
+    err  = (np.math.atan(dist) + hdg_error)/4
 
-    targ_hdg = angle_std(rov_heading+err) 
+    targ_hdg = angle_std(rov_heading+err)
 
+    if np.isnan(targ_hdg):
+        raise ValueError('Target heading was NAN')
+    print('Heading Error: {} \nBearing: {}\nDist: {}\nTotal Error: {}\nTarg Heading: {}\n'.format(hdg_error, brg, dist, err, targ_hdg))
     return targ_hdg
