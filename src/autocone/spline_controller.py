@@ -3,6 +3,7 @@
 
 # Import libraries
 import numpy as np 
+import time
 
 # Import my libraries
 import autocone.utils as utils
@@ -20,6 +21,7 @@ class spline_controller :
         rov_type,
         rov_max_speed,
         rov_min_speed,
+        rov_acc_max,
         rov_max_lat_acc,
         rov_ang_tol,
         min_src_gap,
@@ -41,6 +43,7 @@ class spline_controller :
         self.rov_pos_type = rov_type
         self.rov_max_speed = rov_max_speed
         self.rov_min_speed = rov_min_speed
+        self.rov_acc_max = rov_acc_max
         self.rov_max_lat_acc = rov_max_lat_acc
         self.rov_ang_tol = rov_ang_tol
         self.src_min_gap = min_src_gap
@@ -73,8 +76,9 @@ class spline_controller :
         self.buf_prev_dist = 0
 
         self.utm = None
-
+        self.prev_rov_vel_targ = 0
         self.ready = False
+        self.rov_time_stamp = time.time()
 
     def src_buffer_add( self, pos_x, pos_y, time_stamp ) :
 
@@ -140,7 +144,7 @@ class spline_controller :
             if self.src_data.curr_max_idx + 1 >= self.src_min_points :
                 self.ready=True
 
-    def targ_velocity(self, rov_hdg, ref_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta):
+    def targ_velocity(self, rov_vel, rov_hdg, ref_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta, time_delta):
         
         # Calculate the max velocity from lateral acceleration
         if abs(cp_hdg_delta) > self.rov_ang_tol :
@@ -151,9 +155,9 @@ class spline_controller :
         else :
             v_acc = self.rov_max_speed
 
-        v_src = max(ref_vel, self.rov_min_speed)
-        v_allow = min(v_acc, v_src, self.rov_max_speed)
-
+        v_allow_max = max(ref_vel, self.rov_min_speed, rov_vel + self.rov_acc_max * time_stamp)
+        v_allow_min = min(v_acc, v_allow_max, self.rov_max_speed)
+        
         return v_allow
 
     def controller_step(self, time_stamp, rov_x, rov_y, rov_heading):
@@ -203,8 +207,12 @@ class spline_controller :
                 next_point_brg = geometry.bearing( (rov_x, rov_y), (arr[closest_idx+look_ahead,self.idx_x],arr[closest_idx+look_ahead,self.idx_y]))
                 hdg_targ = hdg_targ_unbounded
                 #hdg_targ = geometry.targ_angle_bound(hdg_targ_unbounded, next_point_brg, cp_hdg)
-                vel_targ = self.targ_velocity(rov_heading, cp_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta)
+                new_time_stamp = time.time()
+                time_delta = new_time_stamp - self.rov_time_stamp
+                vel_targ = self.targ_velocity(self.prev_rov_vel_targ, rov_heading, cp_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta, time_delta)
                 halt=False
+                self.rov_time_stamp = new_time_stamp
+                self.prev_rov_vel_targ = vel_targ
             
             
         if hdg_targ == None and vel_targ == None and lateness == None :
