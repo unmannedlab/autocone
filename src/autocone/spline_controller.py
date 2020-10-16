@@ -110,7 +110,7 @@ class spline_controller :
                 vel_y = (pos_y - self.buf_y) / (time_stamp - self.buf_timestamp)
 
                 vel = np.sqrt( vel_x**2 + vel_y**2 )
-                print('Estimated source velocity: {} m/s'.format(vel))
+                #print('Estimated source velocity: {} m/s'.format(vel))
                 ret = (self.buf_timestamp, self.buf_x, self.buf_y, vel, new_theta, theta_dist_rate, head_delta, dist, total_dist)
 
                 
@@ -143,7 +143,7 @@ class spline_controller :
     def targ_velocity(self, rov_hdg, cur_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta):
         
         # Calculate the max velocity from lateral acceleration
-        if abs(cp_hdg_delta) < self.rov_ang_tol :
+        if abs(cp_hdg_delta) > self.rov_ang_tol :
             v_acc = (2 * self.rov_max_lat_acc * np.sin(cp_hdg_delta/2)) / cp_hdg_delta
         elif abs(geometry.angle_min_diff(rov_hdg,cp_hdg)) > self.rov_ang_tol :
             v_acc = self.rov_min_speed
@@ -186,7 +186,11 @@ class spline_controller :
                 cp_timestamp = arr[closest_idx, self.idx_timestamp]
                 cp_x = arr[closest_idx, self.idx_x]
                 cp_y = arr[closest_idx, self.idx_y]
-                cur_vel = arr[self.src_data.curr_max_idx, self.idx_vel]
+                cur_vel = self.rov_min_speed
+                try:
+                        cur_vel = arr[self.src_data.curr_max_idx, self.idx_vel]
+                except IndexError:
+                        cur_Vel = arr[self.src_data.curr_max_idx-1, self.idx_vel]
                 cp_hdg = arr[closest_idx, self.idx_heading]
                 cp_hdg_rate = arr[closest_idx, self.idx_heading_dist_rate]
                 cp_hdg_delta = arr[closest_idx, self.idx_heading_delta]
@@ -196,7 +200,8 @@ class spline_controller :
                 look_ahead=2
                 hdg_targ_unbounded = self.targ_hdg_fnc(rov_x, rov_y, rov_heading, cp_x, cp_y, cp_hdg)
                 next_point_brg = geometry.bearing( (rov_x, rov_y), (arr[closest_idx+look_ahead,self.idx_x],arr[closest_idx+look_ahead,self.idx_y]))
-                hdg_targ = geometry.targ_angle_bound(hdg_targ_unbounded, next_point_brg, cp_hdg)
+                hdg_targ = hdg_targ_unbounded
+                #hdg_targ = geometry.targ_angle_bound(hdg_targ_unbounded, next_point_brg, cp_hdg)
                 vel_targ = self.targ_velocity(rov_heading, cur_vel, cp_hdg, cp_hdg_rate, cp_hdg_delta)
                 halt=False
             
