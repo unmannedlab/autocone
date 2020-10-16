@@ -127,17 +127,18 @@ if __name__ == '__main__' :
 
     # initialize the spline controller:
     sc = spline_controller(
-        geometry.target_heading_function,
-        'llh',
-        'llh',
-        2.5,
-        2.0,
-        1.0,
-	0.4,
-        1.0,
-        5.0,
-        5,
-        10000
+        targ_hdg_fnc=geometry.target_heading_function,
+        src_type='llh',
+        rov_type='llh',
+        rov_max_speed=2.5,
+        rov_min_speed=2.0,
+        rov_acc_max=0.3,
+        rov_max_lat_acc=1.0,
+        rov_ang_tol=0.4,
+        min_src_gap=1.0,
+        min_src_dist=5.0,
+        min_points=5,
+        max_points=10000
     )
 
     # create ros mgr
