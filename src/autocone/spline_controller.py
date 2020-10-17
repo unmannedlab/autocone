@@ -155,8 +155,9 @@ class spline_controller :
         else :
             v_acc = self.rov_max_speed
 
-        v_allow_max = max(ref_vel, v_acc, self.rov_min_speed, rov_vel + self.rov_acc_max * time_stamp)
-        v_allow_min = min(v_allow_max, self.rov_max_speed)
+        dv = self.rov_acc_max * time_stamp
+        v_allow_max = max(ref_vel, v_acc, self.rov_min_speed, rov_vel + dv)
+        v_allow_min = min(max(v_allow_max, rov_vel - dv), self.rov_max_speed)
         
         return v_allow
 
