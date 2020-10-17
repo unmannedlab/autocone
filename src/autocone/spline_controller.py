@@ -159,7 +159,7 @@ class spline_controller :
         v_allow_max = max(ref_vel, v_acc, self.rov_min_speed, rov_vel + dv)
         v_allow_min = min(max(v_allow_max, rov_vel - dv), self.rov_max_speed)
         
-        return v_allow
+        return v_allow_min
 
     def controller_step(self, time_stamp, rov_x, rov_y, rov_heading):
         # This will step through the controller function to output target heading and the error of the heading
