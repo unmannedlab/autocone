@@ -114,9 +114,9 @@ class ros_hdg_vel_controller:
 
 if __name__=='__main__' :
     # This is going to run the heading / velocity control loop
-    kp = 1.0
+    kp = 0.5
     ki = 0.
-    kd = 0.2
+    kd = 0.1
 
     # Initialize the heading controller and the transform
     hc = PID_hdg(kp, ki, kd)

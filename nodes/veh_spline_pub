@@ -130,7 +130,7 @@ if __name__ == '__main__' :
         targ_hdg_fnc=geometry.target_heading_function,
         src_type='llh',
         rov_type='llh',
-        rov_max_speed=2.5,
+        rov_max_speed=2.0,
         rov_min_speed=1.0,
         rov_acc_max=0.2,
         rov_max_lat_acc=1.0,
