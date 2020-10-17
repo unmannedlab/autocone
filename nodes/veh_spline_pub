@@ -136,7 +136,7 @@ if __name__ == '__main__' :
         rov_max_lat_acc=1.0,
         rov_ang_tol=0.4,
         min_src_gap=1.0,
-        min_src_dist=5.0,
+        min_src_dist=10.0,
         min_points=5,
         max_points=10000
     )
