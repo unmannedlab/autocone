@@ -78,6 +78,7 @@ class spline_controller :
         self.utm = None
         self.prev_rov_vel_targ = 0
         self.ready = False
+        self.min_cp_idx = None
         self.rov_time_stamp = time.time()
 
     def src_buffer_add( self, pos_x, pos_y, time_stamp ) :
@@ -185,6 +186,10 @@ class spline_controller :
 
             # Find the closest point on the spline 
             closest_idx = geometry.min_idx_dist2D_w_arr( rov_x, rov_y, vec_x, vec_y)
+            if self.min_cp_idx == None or closest_idx >= self.min_cp_idx :
+                self.min_cp_idx = closest_idx
+            else :
+                closest_idx = self.min_cp_idx
 
             if self.src_data.show_last()[self.idx_tot_dist] - arr[closest_idx, self.idx_tot_dist] > self.src_min_dist :
                 # gather the details from the closest index
