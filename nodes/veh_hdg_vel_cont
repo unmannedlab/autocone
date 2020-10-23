@@ -2,7 +2,7 @@
 import rospy
 import time
 import autocone.geometry as geometry
-
+import numpy as np
 # Import ros messages
 from std_msgs.msg import *
 from geometry_msgs.msg import *
@@ -56,7 +56,6 @@ class ros_hdg_vel_controller:
         self.rov_pos_new = False
         self.cmd_vel_new = False 
         self.cmd_hdg_new = False 
-        
         # Initialize left and right publishers
         self.pub_lt = rospy.Publisher(self.lt_topic, self.vel_type, queue_size=10)
         self.msg_lt = self.vel_type()
@@ -115,9 +114,9 @@ class ros_hdg_vel_controller:
 
 if __name__=='__main__' :
     # This is going to run the heading / velocity control loop
-    kp = 1.0
-    ki = 0.0
-    kd = 0.1
+    kp = 0.6
+    ki = 0.
+    kd = 0.2
 
     # Initialize the heading controller and the transform
     hc = PID_hdg(kp, ki, kd)

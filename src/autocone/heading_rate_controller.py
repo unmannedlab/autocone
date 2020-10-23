@@ -19,9 +19,11 @@ class PID_hdg :
         return self.kp * error 
     
     def calc_i_term(self, error, timedelta):
-        self.i_sum += error*timedelta
-        return self.ki * self.i_sum
-    
+        if timedelta < 1:
+            self.i_sum += error*timedelta
+            return self.ki * self.i_sum
+        else:
+            return 0
     def calc_d_term(self, error, timedelta):
         if timedelta == 0 :
             return 0
