@@ -1,4 +1,5 @@
 """
+This is the spline following implementation for a rover following a lead vehicle using only position and orientation data.
 """
 
 # Import libraries
@@ -29,6 +30,22 @@ class spline_controller :
         min_points,
         max_points
         ) :
+        """
+        Initialization function for the controller object:
+        Inputs:
+        targ_hdg_fnc:   Function which intakes parameters and outputs a target heading
+        src_type:       The message type that the source gps will publish
+        rov_type:       The message type that the rover will publish
+        rov_max_speed:  The maximum speed the rover would give (m/s)
+        rov_min_speed:  The minimum following speed allowed (m/s)
+        rov_acc_max:    The maximum approximate acceleration which will be allowed when calculating desired speed (m/s^2)
+        rov_max_lat_acc:The maximum approximate lateral acceleration which will be allowed when calculating desired speed (m/s^2)
+        rov_ang_tol:    The maximum angle delta which will be allowed in order to travel at speeds above minimum (radians)
+        min_src_gap:    The minimum gap between source waypoints which will be accepted in meters
+        min_src_dist:   The minimum distance between the rover and the lead vehicle in meters
+        min_points:     The minimum number of points before starting the following regiment
+        max_points:     The maximum number of points allowed in the queue
+        """
 
         # Check the inputs
         if src_type not in ['xyz', 'llh'] :

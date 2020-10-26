@@ -1,4 +1,5 @@
 """
+A series of geometric functions to aide in the spline following algorithm implementation.
 """
 
 # import libraries
@@ -55,6 +56,8 @@ def angle_comp_prep( angle ) :
     return angle 
 
 def angle_std( angle ):
+
+    # REturns an angle between 0 and 2 pi
     return angle_comp_prep(angle) - 2 * np.pi
     
 def angle_min_diff( angle0, angle1 ) :
@@ -105,13 +108,14 @@ def coordinate_bearing( coord0, coord1 ) :
     return np.arctan2( angle_min_diff( coord0[1], coord1[1] ), angle_min_diff( coord0[0], coord1[0] ) )
 
 def min_idx_dist2D_w_arr( pos_x, pos_y, vec_x, vec_y ) :
-    # Find
+    
+    # Find 
     dist_vec = np.sqrt( (pos_x - vec_x) ** 2 + (pos_y - vec_y) ** 2 )
     min_dist = np.min( dist_vec[1:] )
     try :
         min_idx = [x for x in range( len(dist_vec)) if dist_vec[x] == min_dist and  x != 0][0]
     except IndexError:
-        raise IndexError('There was no value which matched the minimum value given {} in the distance vector {}'.format(min_dist, dist_vec))
+        raise IndexError('There was no value which matched the minimsum value given {} in the distance vector {}'.format(min_dist, dist_vec))
     return min_idx
 
 def targ_angle_bound( angle, bound0, bound1 ):
