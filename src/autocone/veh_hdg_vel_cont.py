@@ -30,7 +30,12 @@ class ros_hdg_vel_controller:
         command_hdg_topic,
         command_type
         ):
-
+        """
+        Inputs:
+        heading_controller:
+        vehicle_transform: 
+        
+        """
         # Initialize the rospy node
         rospy.init_node(node_name)
 

@@ -1,12 +1,17 @@
 """
+Transform functions to convert the velocity and heading rate data into motor controller commands.
 """
-#import numpy as np
-#import geometry
 
 class tf_skid_steering :
     """This will accomplish the transforms for the takn skid steering"""
     def __init__(self, axel_length, wheel_diameter, input_dim='linear', output_dim='angular') :
-
+        """
+        Inputs:
+        axel_length:    The length of the axel and for the skid steering
+        wheel_diameter: The diameter of the wheels powering the rover
+        input_dim:      The dimension of the input, either 'angular' or 'linear'
+        output_dim:     The dimension of the output, either 'angular' or 'linear'
+        """
         # Set internal parameters
 
         self.ax = axel_length
