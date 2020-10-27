@@ -20,5 +20,13 @@ Setup:
 - in the workspace root directory run: 
   * catkin_make
   * source devel/setup.bash
+- on the lead vehicle, set the ip address to 192.168.1.100
+- on the rover, set the ip address to 192.168.1.101
 
- 
+
+Quick start:
+- On the lead vehicle run : 
+ * roslaunch autocone combined_lead_vehicle.launch
+- On the rover run ;
+ * roslaunch autocone combined_rover.launch
+ * roslaunch autocone combined_controller.launch
