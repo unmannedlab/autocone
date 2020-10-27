@@ -1,3 +1,6 @@
+"""
+Testing script for testing the motor controllers.
+"""
 # Import relevant libraries
 import rospy
 import time
@@ -6,8 +9,6 @@ import time
 from std_msgs.msg import *
 
 class ros_vel_tester:
-    """
-    """
     def __init__(
         self,
         node_str,
@@ -17,6 +18,15 @@ class ros_vel_tester:
         queue_size,
         frequency_hz
         ):
+        """
+        Inputs:
+        node_str:               The string which the node will be broadcast as
+        left_velocity_topic:    The topic which the commands for the left motor velocity will be broadcasted on
+        right_velocity_topic:   The topic which the commands for the right motor velocity will be broadcasted on
+        velocity_msg_type:      The ros message type which will be used for sending the velocities
+        queue_size:             Ros publisher parameter
+        frequency_hz:           The frequency of publishing the velocity commands
+        """
 
         # Create initialize the rosnode
         rospy.init_node(node_str)

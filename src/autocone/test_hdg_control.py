@@ -1,3 +1,6 @@
+"""
+This script is used to command the robot to achieve a target heading and velocity
+"""
 # Import relevant libraries
 import rospy
 import time
@@ -7,8 +10,6 @@ from std_msgs.msg import *
 import autocone.geometry as geometry
 
 class ros_vel_tester:
-    """
-    """
     def __init__(
         self,
         node_str,
@@ -19,6 +20,15 @@ class ros_vel_tester:
         frequency_hz
         ):
 
+        """
+        Inputs:
+        node_str:           the name of the node which ros will use
+        command_vel_topic:  the ros topic for the velocity commands to be read by the heading / velocity controller
+        command_hdg_topic:  the ros topic for the heading commands to the read by the heading / velocity controller
+        command_type:       the ros message type for the commands
+        queue_size:         the queuesize used by the ros publisher
+        frequency_hz:       the frequency of the command publishing in hz
+        """
         # Create initialize the rosnode
         rospy.init_node(node_str)
 
@@ -38,7 +48,10 @@ class ros_vel_tester:
         heading,
         time_length    
         ):
+        """
+        Inputs:
 
+        """
         # Update the message
         self.vmsg.data = velocity
         self.hmsg.data = heading

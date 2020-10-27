@@ -1,13 +1,17 @@
 """
+A conversion library from GPS coordinates to XYZ meters and vice versa.
 """
 import numpy as np 
 from autocone.geometry import deg2rad, rad2deg
 import autocone.geometry as geometry
 class utm :
-    """
-    """
     def __init__(self, ref_lon, ref_height, gen_offset=True) :
-
+        """
+        Input:
+        ref_lon:    The reference longitude in degrees to base the calculations off of
+        ref_height: The reference height to base the Z calculations off of
+        gen_offset: If true, will take the first given point as a zero point and will produce XYZ coordinates from that original point.
+        """
         # Store internal parameters
         self.lambda0 = ref_lon
         self.h0 = ref_height

@@ -1,4 +1,5 @@
 """
+Utilities module for different house keeping functions for the rest of the autocone codebase.
 """
 
 # import relavent libraries

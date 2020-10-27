@@ -1,3 +1,7 @@
+"""
+Heading and velocity controller for the vehicle. This is the reference for the rosnode which achieves the same function.
+"""
+
 import rospy
 import time
 import geometry
@@ -12,8 +16,6 @@ from autocone.heading_rate_controller import PID_hdg
 from autocone.vehicle_transforms import tf_skid_steering
 
 class ros_hdg_vel_controller:
-    """
-    """
     def __init__(
         self,
         heading_controller,
