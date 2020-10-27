@@ -26,7 +26,7 @@ Setup:
 
 Quick start:
 - On the lead vehicle run : 
- * roslaunch autocone combined_lead_vehicle.launch
+  * roslaunch autocone combined_lead_vehicle.launch
 - On the rover run ;
- * roslaunch autocone combined_rover.launch
- * roslaunch autocone combined_controller.launch
+  * roslaunch autocone combined_rover.launch
+  * roslaunch autocone combined_controller.launch
