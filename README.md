@@ -10,4 +10,5 @@ Hardware overview:
 Setup:
 - Setup a catkin workspace within the ros workspace.
 - Within the src folder clone the following git repositories into the src directory:
-  - 
+  * https://github.com/unmannedlab/autocone.git
+  *
